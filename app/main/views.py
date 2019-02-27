@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from flask_login import login_required
-from .form import ReviewForm,UpdateProfile
+from .form import UpdateProfile,CommentsForm,PitchForm
 from .. import db,photos
 
 
@@ -74,5 +74,15 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname)) 
+
+
+@main.route('/view/comment/<int:id>')
+def view_comments(id):
+    '''
+    Function that returs  the comments belonging to a particular pitch
+    '''
+    comments = Comment.get_comments(id)
+    return render_template('view_comments.html',comments = comments, id=id)
+   
 
 
