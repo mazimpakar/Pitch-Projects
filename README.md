@@ -39,11 +39,13 @@ A user the needs to sign in order to create,vote and post pitches
 ## Setup/Installation Requirements
 
 when you reach on this applicatin you want to user: 
- git clone https://github.com/mazimpakar/Pitch-Projects.git
- cd Pitch
-source virtual/bin/activate
+ *git clone
+    https://github.com/mazimpakar/Pitch-Projects.git
+*cd Pitch
+*source virtual/bin/activate 
+*Inside the manage.py module change the config_name  ie app = create_app('production') should be app = create_app('development')
 
- ./start.sh to run this app
+*./start.sh to run this app
 
 
 ## Support and contact details
