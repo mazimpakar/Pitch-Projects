@@ -28,11 +28,10 @@ A user the needs to sign in order to create,vote and post pitches
 
 
 ## Technologie Used
-
-    *HTML/CSS
-    *Bootstrap
-    *Python3.6
-    *flask
+*HTML/CSS
+*Bootstrap
+*Python3.6
+*flask
 
 ## Link site: https://github.com/mazimpakar/Pitch-Projects
 
