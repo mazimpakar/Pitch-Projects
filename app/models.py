@@ -10,7 +10,8 @@ class User(UserMixin,db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
-    # role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+    pitchs = db.relationship('Pitch',backref='user',lazy="dynamic")
+    comments = db.relationship('Comment',backref='user',lazy="dynamic")
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
@@ -39,8 +40,30 @@ class Pitch(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     name = db.Column(db.String(255))
     category = db.Column(db.String(255))
-    comments = db.relationship('comment',backref='pitch',lazy="dynamic")
+    comments = db.relationship('Comment',backref='pitch',lazy="dynamic")
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    def save_pitch(self):
+        '''
+        Function that saves pitches
+        '''
+        db.session.add(self)
+        db.session.commit()
+    
+    @classmethod
+    def get_all_pitches(cls):
+        '''
+        Function that queries the databse and returns all the pitches
+        '''
+        return Pitch.query.all()
+
+    @classmethod
+    def get_pitches_by_category(cls,cat_id):
+        '''
+        Function that queries the databse and returns pitches based on the
+        category passed to it
+        '''
+        return Pitch.query.filter_by(category_id= cat_id)
+
 
     def __repr__(self):
         return f'User {self.name}'
@@ -52,22 +75,23 @@ class Comment(db.Model):
     name = db.Column(db.String(255))
     pitch_id = db.Column(db.Integer,db.ForeignKey('pitchs.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    vote = db.Column(db.Integer)
+    def save_comment(self):
+        '''
+        Function that saves comments
+        '''
+        db.session.add(self)
+        db.session.commit()
 
+    @classmethod
+    def clear_comments(cls):
+        Comment.all_comments.clear()
+
+    @classmethod
+    def get_comments(cls,id):
+        comments = Comment.query.filter_by(pitch_id=id).all()
+
+       
 
     def __repr__(self):
         return f'User {self.name}'
-       
-    
-
-
-
-
-# class Role(db.Model):
-#     __tablename__ = 'roles'
-
-#     id = db.Column(db.Integer,primary_key = True)
-#     name = db.Column(db.String(255))
-#     users = db.relationship('User',backref = 'role',lazy="dynamic")
-
-#     def __repr__(self):
-#         return f'User {self.name}'

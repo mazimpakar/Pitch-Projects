@@ -1,6 +1,5 @@
 
-{{% macro displayPitches(pitches_list) %}
-
+{% macro displayPitches(pitches_list) %}
 {% for pitch in pitches_list %}
   <div class="panel style="style="box-shadow: 5px 5px 5px 5px #f2f2f2; padding:10px; text-align:center;">
       <p>{{pitch.pitch}}</p>
@@ -41,41 +40,5 @@
     </div>
 {% endif%}
 {% endfor %}
-{% block content %}
-
-    <div class="container">
-        <h3>Inteview Pitches</h3>
-        <a href="{{url_for('main.new_pitch')}}">
-            <br>
-            Add a new Pitch
-        </a>
-
-        <hr>
-        
-            {{macro.displayPitchesInCategories(pitches,1)}}
-        <hr>
-    
-    </div>
-
-{% endblock %}
-{% block content %}
-
-    <div class="container">
-        <h3>Product Pitches</h3>
-        <a href="{{url_for('main.new_pitch')}}">
-            <br>
-            Add a new Pitch
-        </a>
-
-        <hr>
-        
-            {{macro.displayPitchesInCategories(pitches,4)}}
-        <hr>
-    
-    </div>
-
-{% endblock %}
-
-
 {% endmacro%}
 

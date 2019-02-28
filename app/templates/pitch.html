@@ -15,17 +15,17 @@
     </div>
     <div class="row">
             
-                    <h1>Add you comments</h1>
+            <h1>Add you comments</h1>
                     <hr>
             
-                    {% if pitch_comments %}
-                        {{ macro.displayComments(pitch_comments) }}
+            {% if pitch_comments %}
+            {{ macro.displayComments(pitch_comments) }}
             
-                    {% else%}
-                        <h3 class="text-center">No comments </h3>
-                    {% endif %}
+            {% else%}
+            <h3 class="text-center">No comments </h3>
+            {% endif %}
 
-                </div>
+    </div>
 
 </div>
 {% endblock %}

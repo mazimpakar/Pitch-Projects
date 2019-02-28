@@ -4,11 +4,6 @@ from flask_login import login_required
 from .form import UpdateProfile,CommentsForm,PitchForm
 from .. import db,photos
 
-
-
-
-
-
 # Views
 @main.route('/')
 def index():
@@ -17,18 +12,10 @@ def index():
     View root page function that returns the index page and its data
     '''
 
-    # Getting popular movie
-    # popular_movies = get_movies('popular')
-    # upcoming_movie = get_movies('upcoming')
-    # now_showing_movie = get_movies('now_playing')
+    
+    title = ('Home' 'Welcome to the Pitch')
 
-    title = 'Home'
-
-    # search_movie = request.args.get('movie_query')
-
-    # if search_movie:
-    #     return redirect(url_for('.search',movie_name=search_movie))
-    # else:
+    
     return render_template('index.html', title = title)
 
 
@@ -83,6 +70,52 @@ def view_comments(id):
     '''
     comments = Comment.get_comments(id)
     return render_template('view_comments.html',comments = comments, id=id)
+
+@main.route('/pitch/new/', methods = ['GET','POST'])
+@login_required
+def new_pitch():
+    '''
+    Function that creates new pitches
+    '''
+    form = PitchForm()
+
+
+    if category is None:
+        abort( 404 )
+
+    if form.validate_on_submit():
+        pitch= form.content.data
+        category_id = form.category_id.data
+        new_pitch= Pitch(pitch= pitch, category_id= category_id)
+
+        new_pitch.save_pitch()
+        return redirect(url_for('main.index'))
+
+@main.route('/category/<int:id>')
+def category(id):
+    '''
+    function that returns pitches based on the entered category id
+    '''
+    category = PitchCategory.query.get(id)
+
+    if category is None:
+        abort(404)
+
+    pitches_in_category = Pitches.get_pitch(id)
+    return render_template('category.html' ,category= category, pitches= pitches_in_category)
+
+@main.route('/pitch/comments/new/<int:id>',methods = ['GET','POST'])
+@login_required
+def new_comment(id):
+    form = CommentsForm()
+    vote_form = UpvoteForm()
+    if form.validate_on_submit():
+        new_comment = Comment(pitch_id =id,comment=form.comment.data,username=current_user.username,votes=form.vote.data)
+        new_comment.save_comment()
+        return redirect(url_for('main.index'))
+    #title = f'{pitch_result.id} review'
+    return render_template('new_comment.html',comment_form=form, vote_form= vote_form)  
+   
    
 
 
