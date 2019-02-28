@@ -1,16 +1,22 @@
-{% extends 'base.html'%}
-
-{% block content%}
-<div class="container-fluid">
-
-  <div class="row">
-    <div class="col-sm-4">
-      <img src="{{comment.image_path}}" class="img-responsive">
+    {% extends 'base.html' %} 
+    {% import 'bootstrap/wtf.html' as wtf %} 
+    {% import 'macros.html' as macro %} 
+    {% block body %}
+    
+    <div class="container-fluid">
+        <div class="row">
+    
+            <div class="col-md-4 col-sm-4 col-xs-4" id="column_one">
+                <div class="container" style = "background-color: white; padding: 5%; margin-left: 3%; color: black;">
+                    {{wtf.quick_form(comments_form)}}
+                </div>
+            </div>
+    
+            <div class="col-md-6 col-sm-6 col-xs-6" id="column_two">
+                {{macro.displayCommentsList(comments)}}
+            </div>
+    
+        </div>
     </div>
-
-    <div class="col-sm-8">
-      {{format_comment|safe}}
-    </div>
-  </div>
-</div>
-{%endblock
+    
+    {% endblock %}
