@@ -28,9 +28,10 @@
 
 <div class="container">
     <h1 style="text-align:center; padding-top: 50px; color:darkslateblue;">WELCOME TO THE PITCH APPLICATION</h1>
+
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
         <div class="panel style="style="border: 3px solid #f2f2f2; padding:20px; margin-top:10px;">
-            <p style="font-family: 'Bellefair', serif; font-size:20px;">PITCH</p>
+            <p style="font-family: 'Bellefair', serif; font-size:20px;">Write your pitch in any of the categories to the left and let other user vote and comment on it.Please also feel free to comment and vote on pitches posted by other people </p>
             
             <div style="text-align:center;">
                 <a href="{{url_for('main.new_pitch')}}">
@@ -45,7 +46,7 @@
     </div>
 </hr>
     <div class="all-pitches">
-        <span style="color:ga;">All pitches </span>
+        <span style="color:darkslateblue;">All pitches </span>
             <hr> 
             {{macro.displayPitches(pitches)}}
         
@@ -53,9 +54,6 @@
     </div>
 
 </div>
-
-
-
 
 
 

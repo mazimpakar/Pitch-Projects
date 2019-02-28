@@ -41,5 +41,41 @@
     </div>
 {% endif%}
 {% endfor %}
+{% block content %}
+
+    <div class="container">
+        <h3>Inteview Pitches</h3>
+        <a href="{{url_for('main.new_pitch')}}">
+            <br>
+            Add a new Pitch
+        </a>
+
+        <hr>
+        
+            {{macro.displayPitchesInCategories(pitches,1)}}
+        <hr>
+    
+    </div>
+
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <h3>Product Pitches</h3>
+        <a href="{{url_for('main.new_pitch')}}">
+            <br>
+            Add a new Pitch
+        </a>
+
+        <hr>
+        
+            {{macro.displayPitchesInCategories(pitches,4)}}
+        <hr>
+    
+    </div>
+
+{% endblock %}
+
+
 {% endmacro%}
 
