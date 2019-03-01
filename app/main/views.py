@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, abort  
 from . import main  
 from .form import CommentsForm, UpdateProfile, PitchForm, UpvoteForm
-from ..models import Comment, Pitch, User 
+from ..models import Comment, Blog, Writter 
 from flask_login import login_required, current_user
 from .. import db,photos
 
@@ -12,25 +12,25 @@ from .. import db,photos
 @main.route('/')
 def index():
     
-    title = 'Home - Welcome to The  Pitching '
+    title = 'Home - Welcome to The  Blog application'
 
-    search_pitch = request.args.get('pitch_query')
-    pitches= Pitch.get_all_pitches()  
+    search_blog = request.args.get('blog_query')
+    blogs= Blog.get_all_blogs()  
 
-    return render_template('index.html', title = title, pitches= pitches)
+    return render_template('index.html', title = title, blogs= blogs)
 
 #this section consist of the category root functions
 
-@main.route('/inteview/pitches/')
+@main.route('/inteview/blogs/')
 def interview():
     '''
     View root page function that returns the index page and its data
     '''
-    pitches= Pitch.get_all_pitches()
-    title = 'Home - Welcome to The best Pitching Website Online'  
-    return render_template('interview.html', title = title, pitches= pitches )
+    blogs= Blog.get_all_blogs()
+    title = 'Home - Welcome to The Blog application'  
+    return render_template('interview.html', title = title, blogs= blogs )
 
-@main.route('/pick_up_lines/pitches/')
+@main.route('/pick_up_lines/blogs/')
 def pick_up_line():
     '''
     View root page function that returns the index page and its data
